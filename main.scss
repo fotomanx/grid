@@ -1,0 +1,74 @@
+@mixin row{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $container;
+    margin: 0 auto;
+    @include adap(xl){
+        max-width: 1124px;
+    }
+    @include adap(lg){
+        max-width: 920px;
+    }
+    @include adap(md){
+        max-width: 740px;
+    }
+    @include adap(sm){
+        max-width: 540px;
+    }
+}
+$margin : 30px;
+@mixin col($num, $lg, $md, $sm: 12, $xs: 12){
+    $width: (100% / 12) * $num;
+    width: calc(#{$width} - #{$margin});
+    border-radius: 5px;
+    margin: $margin / 2;
+    box-sizing: border-box;
+    @if $num != $lg{
+        @include adap(lg){
+                $width-lg: (100% / 12) *  $lg;
+                width: calc(#{$width-lg} - #{$margin});
+            }
+    }
+    @if $lg != $md{
+        @include adap(md){
+            @if $md == 0{
+                    display: none;
+                }
+            @else{
+                $width-md: (100% / 12) *  $md;
+                width: calc(#{$width-md} - #{$margin});
+            }
+                
+            }
+        }
+    @if $md != $sm{
+        @include adap(sm){
+            @if $sm == 0{
+                    display: none;
+                }
+            @else {
+                $width-sm: (100% / 12) *  $sm;
+                width: calc(#{$width-sm} - #{$margin});
+            }
+                
+        }
+    }
+    @if $sm != $xs{
+        @include adap(xs){
+            @if $xs == 0{
+                    display: none;
+                }
+            @else {
+                display: block;
+                $width-xs: (100% / 12) *  $xs;
+                width: calc(#{$width-xs} - #{$margin});
+            }
+                
+        }
+    }
+    
+}
+
+
+
+
